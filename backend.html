@@ -1,0 +1,52 @@
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+
+firebase.initializeApp({
+    apiKey: "AIzaSyC9NYh_jchFQ008x5z7n-LHjX5ATRf7ww0",
+    authDomain: "project-3e578.firebaseapp.com",
+  databaseURL: '<fath.html>',
+});
+
+const auth = firebase.auth();
+const database = firebase.database();
+
+// Authentication logic
+auth.onAuthStateChanged(user => {
+  if (user) {
+    // User is signed in
+    console.log('User signed in:', user);
+  } else {
+    // User is signed out
+    console.log('User signed out');
+  }
+});
+
+// Login with Google
+document.getElementById('google-login').addEventListener('click', () => {
+  auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+});
+
+// Login with Facebook
+document.getElementById('facebook-login').addEventListener('click', () => {
+  auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+});
+
+// Login with Email and Password
+document.getElementById('email-login').addEventListener('click', () => {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  auth.signInWithEmailAndPassword(email, password);
+});
+
+// Register user
+document.getElementById('register').addEventListener('click', () => {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  auth.createUserWithEmailAndPassword(email, password);
+});
+
+// Realtime Database logic
+database.ref('users').on('value', snapshot => {
+  console.log('Users:', snapshot.val());
+});

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Registration Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #2c3268, #a9249a);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="contact">Contact Number:</label>
+            <input type="tel" id="contact" name="contact" required>
+
+            <label for="skills">Skills:</label>
+            <select id="skills" name="skills" required>
+                <option value="" disabled selected>Select your skill</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Care taker">Care taker</option>
+                <option value="Home nurse">Home nurse</option>
+                <option value="Paramedic">Paramedic</option>
+                <option value="Cameraman">Cameraman</option>
+                <option value="Delivery boy">Delivery boy</option>
+                <option value="Driver">Driver</option>
+                <option value="Plumber">Plumber</option>
+                <option value="House cleaner">House cleaner</option>
+                <option value="Home tutor">Home tutor</option>
+                <option value="Baby sitter">Baby sitter</option>
+                <option value="Beautician">Beautician</option>
+                <option value="Cook">Cook</option>
+                <option value="Mechanic">Mechanic</option>
+                <option value="Pest control">Pest control</option>
+                <option value="Ambulance">Ambulance</option>
+                <option value="Carpenter">Carpenter</option>
+                <option value="Medical assistance">Medical assistance</option>
+            </select>
+
+            <input type="submit" value="Submit">
+        </form>
+
+
+    </div>
+</body>
+</html>
