@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to bottom, #2c3268, #a9249a);
+        margin: 0;
+        padding: 0;
+      }
+
+      .loading {
+        pointer-events: none;
+        cursor: wait;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 50px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      h2 {
+        text-align: center;
+        color: #333333;
+        margin-bottom: 20px;
+      }
+
+      p {
+        margin-bottom: 15px;
+        color: #666666;
+        font-size: 16px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #444444;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      select,
+      button {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #dddddd;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        font-size: 16px;
+        background-color: #f5f5f5;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus,
+      select:focus,
+      button:focus {
+        border-color: #4caf50;
+      }
+
+      .google-button {
+        background-color: #0b0983; /* Google red */
+        color: #ffffff; /* White text */
+      }
+
+      .facebook-button {
+        background-color: #061b88; /* Facebook blue */
+        color: #ffffff; /* White text */
+      }
+
+      .email-button {
+        background-color: #060893; /* Email blue */
+        color: #ffffff; /* White text */
+      }
+
+      button {
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        opacity: 0.9;
+      }
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        margin-left: 5px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: #333333;
+      }
+
+      .login-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .login-buttons button {
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+
+      /* Additional styles for a more attractive look */
+      .google-button,
+      .facebook-button,
+      .email-button {
+        border: none;
+        border-radius: 20px;
+        padding: 12px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .google-button:hover,
+      .facebook-button:hover,
+      .email-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Create an Account</h2>
+      <form>
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" required />
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name" required />
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required />
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required />
+        <label for="user_type">Select User Type:</label>
+        <select name="user_type" id="user_type">
+          <option value="client">Client</option>
+          <option value="volunteer">Volunteer</option>
+        </select>
+        <button type="submit" name="submit">Register</button>
+        <p>
+          <a href="/login"
+            >Already Have an Account? <span class="highlight">Log in</span></a
+          >
+        </p>
+      </form>
+    </div>
+    <script>
+          const form = document.querySelector("form");
+          const email = document.querySelector("#email");
+          const password = document.querySelector("#password");
+          const first_name = document.querySelector("#first_name");
+          const last_name = document.querySelector("#last_name");
+          const type = document.querySelector("#user_type");
+          form.addEventListener("submit", (event) => {
+            document.querySelector("html").classList.add("loading");
+            event.preventDefault();
+            let data = {
+              email: email.value,
+              pass: password.value,
+              first_name: first_name.value,
+              last_name: last_name.value,
+              type: type.value,
+            }
+            fetch("/signup_user", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }).then(response => response.json())
+            .then(data=>{
+              alert(data.message)
+              document.querySelector("html").classList.remove("loading")
+              if (data.status) {
+                window.location.href = "/";
+              }
+            }) .catch(error=>{
+              document.querySelector("html").classList.remove("loading")
+              alert(error)
+            })
+          });
+    </script>
+  </body>
+</html>
